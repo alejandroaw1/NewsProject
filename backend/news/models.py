@@ -9,7 +9,7 @@ class News(models.Model):
         PUBLISHED = 'PUBLISHED', 'Publicado'
         ARCHIVED = 'ARCHIVED' , 'Archivado'
 
-    tittle = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
 
     slug = models.SlugField(
         max_length=220,
