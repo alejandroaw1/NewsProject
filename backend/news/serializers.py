@@ -36,6 +36,7 @@ class NewsSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "id",
             "slug",
+            "author",
             "author_name",
             "category_name",
             "created_at",
