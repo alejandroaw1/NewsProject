@@ -13,6 +13,8 @@ class NewsSerializer(serializers.ModelSerializer):
         read_only=True
     )
 
+    image_url = serializers.SerializerMethodField()
+
     class Meta:
         model = News
         fields = [
@@ -21,7 +23,7 @@ class NewsSerializer(serializers.ModelSerializer):
             "slug",
             "summary",
             "content",
-            "main_image",
+            "image_url",
             "publication_date",
             "location",
             "author",
@@ -39,6 +41,15 @@ class NewsSerializer(serializers.ModelSerializer):
             "author",
             "author_name",
             "category_name",
+            "image_url",
             "created_at",
             "updated_at",
         ]
+
+    def get_image_url(self, obj):
+        request = self.context.get("request")
+
+        if obj.main_image and request:
+            return request.build_absolute_uri(obj.main_image.url)
+
+        return None
