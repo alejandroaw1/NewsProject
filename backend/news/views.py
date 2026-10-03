@@ -12,6 +12,8 @@ class NewsViewSet(viewsets.ModelViewSet):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
 
+    lookup_field = "slug"
+
     filter_backends = [
         DjangoFilterBackend,
         filters.SearchFilter,
