@@ -1,15 +1,24 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import api from "../services/api";
+import NewsCard from "../components/newsCard";
+import Sidebar from "../components/Sidebar";
 
 function Home() {
     const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
+    const [searchParams] = useSearchParams();
+    const category = searchParams.get("category");
+
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await api.get("/news/");
+                const response = await api.get("/news/", {
+                    params: category ? { category } : {},
+                });
+
                 setNews(response.data.results);
             } catch (error) {
                 console.error(error);
@@ -31,33 +40,29 @@ function Home() {
     }
 
     return (
-        <main>
+    <main className="home-container">
+
+        <section className="news-section">
             <h1>Noticias</h1>
 
             {news.length === 0 ? (
                 <p>No hay noticias disponibles.</p>
             ) : (
-                news.map((item) => (
-                    <article key={item.id}>
-                        <h2>{item.title}</h2>
-
-                        {item.image_url && (
-                            <img
-                                src={item.image_url}
-                                alt={item.title}
-                            />
-                        )}
-
-                        <p>{item.summary}</p>
-
-                        <p>
-                            {item.category_name} · {item.location}
-                        </p>
-                    </article>
-                ))
+                <div className="news-grid">
+                    {news.map((item) => (
+                        <NewsCard
+                            key={item.id}
+                            news={item}
+                        />
+                    ))}
+                </div>
             )}
-        </main>
-    );
+        </section>
+
+        <Sidebar />
+
+    </main>
+);
 }
 
 export default Home;
