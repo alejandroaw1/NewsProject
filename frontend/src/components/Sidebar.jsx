@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
 
 function Sidebar() {
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState("");
+    const [search, setSearch] = useState("");
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -20,22 +23,40 @@ function Sidebar() {
         fetchCategories();
     }, []);
 
+    const handleSearch = (event) => {
+        event.preventDefault();
+
+        const query = search.trim();
+
+        if (!query) {
+            navigate("/");
+            return;
+        }
+
+        navigate(`/?search=${encodeURIComponent(query)}`);
+    };
+
     return (
         <aside className="sidebar">
 
             <section className="sidebar-section">
                 <h3>Buscar noticias</h3>
 
-                <div className="search-box">
+                <form
+                    className="search-box"
+                    onSubmit={handleSearch}
+                >
                     <input
                         type="text"
                         placeholder="Buscar noticias..."
+                        value={search}
+                        onChange={(event) => setSearch(event.target.value)}
                     />
 
-                    <button>
+                    <button type="submit">
                         Buscar
                     </button>
-                </div>
+                </form>
             </section>
 
             <section className="sidebar-section">

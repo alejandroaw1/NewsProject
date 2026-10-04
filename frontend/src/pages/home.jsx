@@ -10,13 +10,26 @@ function Home() {
     const [error, setError] = useState("");
 
     const [searchParams] = useSearchParams();
+
     const category = searchParams.get("category");
+    const search = searchParams.get("search");
 
     useEffect(() => {
         const fetchNews = async () => {
             try {
+                setLoading(true);
+                const params = {};
+
+                if (category) {
+                    params.category = category;
+                }
+
+                if (search) {
+                    params.search = search;
+                }
+
                 const response = await api.get("/news/", {
-                    params: category ? { category } : {},
+                    params,
                 });
 
                 setNews(response.data.results);
@@ -29,7 +42,7 @@ function Home() {
         };
 
         fetchNews();
-    }, []);
+    }, [category, search]);
 
     if (loading) {
         return <p>Cargando noticias...</p>;
