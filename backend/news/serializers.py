@@ -7,12 +7,10 @@ class NewsSerializer(serializers.ModelSerializer):
         source="author.username",
         read_only=True
     )
-
     category_name = serializers.CharField(
         source="category.name",
         read_only=True
     )
-
     image_url = serializers.SerializerMethodField()
 
     class Meta:
@@ -23,6 +21,7 @@ class NewsSerializer(serializers.ModelSerializer):
             "slug",
             "summary",
             "content",
+            "main_image",
             "image_url",
             "publication_date",
             "location",

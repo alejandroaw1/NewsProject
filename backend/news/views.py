@@ -62,4 +62,11 @@ class NewsViewSet(viewsets.ModelViewSet):
     
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+    def create(self, request, *args, **kwargs):
+        print("CONTENT TYPE:", request.content_type)
+        print("FILES:", request.FILES)
+        print("DATA:", request.data)
+
+        return super().create(request, *args, **kwargs)
         

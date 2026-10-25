@@ -635,3 +635,143 @@ a {
         flex: 1;
     }
 }
+
+/* News form */
+
+.news-form-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+.news-form-header {
+    margin-bottom: 30px;
+}
+
+.news-form-header .back-link {
+    border: none;
+    background: none;
+    padding: 0;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.news-form-header h1 {
+    margin-bottom: 8px;
+    font-size: 32px;
+}
+
+.news-form-header p {
+    color: #666666;
+}
+
+.news-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.news-form-section {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 28px;
+}
+
+.news-form-section h2 {
+    margin-bottom: 24px;
+    font-size: 21px;
+}
+
+.news-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.news-form-field:last-child {
+    margin-bottom: 0;
+}
+
+.news-form-field label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.news-form-field input,
+.news-form-field textarea,
+.news-form-field select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.news-form-field textarea {
+    resize: vertical;
+}
+
+.news-form-field input:focus,
+.news-form-field textarea:focus,
+.news-form-field select:focus {
+    outline: none;
+    border-color: #111111;
+}
+
+.news-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.news-form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.news-form-checkbox input {
+    width: 16px;
+    height: 16px;
+}
+
+.news-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.news-form-error {
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    color: #333333;
+}
+
+@media (max-width: 700px) {
+    .news-form-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .news-form-section {
+        padding: 20px;
+    }
+
+    .news-form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .news-form-actions button {
+        width: 100%;
+    }
+}
